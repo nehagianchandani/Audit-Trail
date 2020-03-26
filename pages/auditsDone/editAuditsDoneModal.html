@@ -1,0 +1,75 @@
+<!-- <div  class="modal hide" data-backdrop="static" data-keyboard="false"> -->
+       <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">Edit Audits Done</h3>
+        </div>
+        <div class="modal-body" ng-controller="auditsDone-ctrl" style = "overflow-x: auto; position: relative; overflow-y: auto;" id="modal-body">
+            
+            <div class="container" style="width: 450px">
+                <div class="row">
+                <div class="col-sm">
+
+                        <form >
+                            Audit Type:&nbsp;&nbsp;&nbsp;
+                            <select  style="width: 150px" name="auditType" value="auditType" ng-options="auditType.auditType for auditType in auditType" ng-model="auditTypeSelected" required>
+                                    <option value=""  hidden />
+                                    </select> 
+                            <br>
+                            <br>
+
+                            Year:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <select  style="width: 150px" name="year" ng-options="year.year for year in year" value="year" ng-model="yearSelected" required>
+                                    <option value=""  hidden /></select> 
+                            <br>
+                            <br>
+
+                            Station:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span ng-show= "stationIncharge.length===1" >
+                                {{stationIncharge[0]}}
+                            </span>
+                            <span ng-show= "stationIncharge.length>1">
+                            <select   style="width: 150px"  ng-options="stationIncharge for stationIncharge in stationIncharge" value="stationIncharge" ng-model="stationSelected" required>
+                            <option value=""  hidden /></select> 
+                        </span>
+                            <br>
+                            <br>
+
+                            <!-- Sub-Station:&nbsp;
+                            <select  style="width: 150px" name="subStation" ng-options="subStations.subStation for subStations in subStations" value="subStation" ng-model="subStationSelected" required>
+                                    <option value="" hidden /></select> 
+                            <br>
+                            <br> -->
+
+                            From:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input  type="date" name="from"   max={{todayDate}} ng-model="fromSelected" required>
+                            <br>
+                            <br>
+
+                            To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input  type="date" name="to"   max={{todayDate}} ng-model="toSelected" required>
+                            <br>
+                            <br>
+                            <br>
+                            <button class="btn btn-warning" type="submit" value="Submit" ng-click="addNewAuditsDone()">Submit</button>
+                            &nbsp;&nbsp; <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                           <!-- <input type="submit" value="Submit"> -->
+                          </form> 
+
+
+
+
+
+
+
+
+                   
+                </div>
+                </div>
+            </div>
+            
+
+        </div>
+        <!-- <div class="modal-footer">
+          <button class="btn btn-success" type="button" ng-click="pc.ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div> -->
+    <!-- </div> -->

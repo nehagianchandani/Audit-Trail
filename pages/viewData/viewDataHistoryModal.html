@@ -1,0 +1,145 @@
+
+      <div  class="modal-header">
+            <h3 class="modal-title" id="modal-title">History</h3>
+        </div>
+        <div     class="modal-body" ng-controller="viewData-ctrl" style = "overflow-x: auto; position: relative; overflow-y: auto;" id="modal-body">
+            
+            <div  class="container"  style="margin-left:5px;margin-right:5px">
+                <div class="row">
+                <div  class="col-sm">
+
+                    <table   st-table="entries" st-safe-src="rowCollectionEntries" style="margin : 0px;color: black" class="table">
+                      <div style=" color:blue; ">
+                        
+                        
+                    </div>
+                      
+                      
+                      <thead>
+                           
+                            <tr>
+                              
+                                <th>Sr. no</th>
+                                <th> Sub-station</th>
+                                <th >General Observations</th>
+                                <th  >Recommendations</th>
+                                <th  >Target Date</th>
+                               <th >Current Status</th>
+                                <th >Action taken</th>
+                                <th >Compliance Status</th>
+                                <th >Action taken by</th>
+                                <th >Remarks</th>
+                                <th >Edited Date</th>
+                                <th >Employee ID</th>
+                              
+                             
+                              
+                                   </tr>
+                                  
+                         
+                      </thead>
+                      <tbody>
+
+                        <tr ng-repeat="data in flattenedHistory  track by $index" >
+                          
+                          
+      
+
+                        <!-- <div style=" color:blue; ">
+                          {{detailsmodaldata.auditType}}-{{detailsmodaldata.year}}-{{detailsmodaldata.station}}-{{detailsmodaldata.subStation}}
+                      </div> -->
+                      <td> {{$index+1}}</td>
+                    
+
+                      <td>
+                        {{ data.subStation || '-' }}
+
+
+                      </td>
+
+
+
+
+                    <td>    
+                      <span></span>
+                      {{ data.generalObservations || '-' }}
+                     
+                    </td>
+                    <td>    
+                      
+                      {{ data.recommendations || '-' }}
+                      
+                    </td>
+                    <td>    
+                      
+                      {{ data.targetDate || '-' }}
+                     
+                    </td>
+                    <td>    
+                      
+                      {{ data.currentStatus || '-' }}
+                      
+                    </td>
+                    <td>    
+                     
+                      {{ data.actionTaken || '-' }}
+                      
+                    </td>
+                    <td >    
+                      
+                     
+                        {{ data.complianceStatus || '-' }}
+                      
+                      
+                    </td>
+                    <td>    
+                     
+                        {{ data.actionTakenBy || '-' }}
+                     
+                    </td>
+                    <td>    
+                      
+                        {{ data.remarks || '-' }}
+                      
+                      
+                    </td>
+                    <td>    
+                      
+                      {{ data.editDate |  date : "mediumDate" || '-' }}
+                      
+                    </td>
+                    <td>    
+                      
+                      {{ data.empID || '-' }}
+                      
+                    </td>
+                   
+                  </tr>
+                </tbody>
+</table>
+                   
+                      </div>
+                     
+                 
+
+
+
+                  
+
+
+
+
+
+  
+                   
+                </div>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+              <!-- <button class="btn btn-success" type="button" ng-click="pc.ok()">OK</button> -->
+                <button class="btn btn-warning" type="button" ng-click="cancelHistory()">Cancel</button>
+            </div>
+
+
+       

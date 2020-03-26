@@ -1,0 +1,112 @@
+
+  <div ng-controller = "auditsDone-ctrl" ng-init="init()">
+    <div ng-show = "auditsDone.auditsDoneData &&  auditsDone.auditsDoneData.length == 0">
+      <div class="alert">
+          <div class="form-group select-page-size-wrap ">
+              <select class="form-control selectpicker show-tick" title="Rows on page" selectpicker
+              ng-model="smartTablePageSize" ng-options="i for i in [5,10,15,20,25]">
+      </select>
+              <h4 style="color:red;white-space: nowrap;">
+               Sorry! No records found.
+              </h4>
+          </div>
+      </div>
+    </div>  
+    
+  <div style="background-size: 1679px 944px; background-position: 0px -79px; color: black">
+  
+    <div  style="padding:0px">
+        <div class="panel-body"  style="padding:0px"> 
+            <div class = "row" >
+              <div style="margin-bottom: 20px;margin-top: 10px">
+                <button type="button" ng-click = "open(data)" class="btn btn-default btn-icon"><i class="ion-plus"></i></button> 
+                  Add New Record
+              </div>
+            </div>  
+  
+            
+           
+                 <table style="width: 750px" st-table="auditsDone" st-safe-src="rowCollection" style="margin : 0px;color: black;width: 600px" class="table">
+                    <thead>
+                       
+                        <tr>
+                          <th  style="width: 30px">Sr. No</th>
+                          <th  style="width: 150px">Audit Type</th>
+                          <th style="width: 100px">Year</th>
+                          <th  style="width: 150px">Station</th>
+                          
+                         
+                          <th style="width: 200px">Start Date</th>
+                          <th style="width: 200px">End Date</th>
+                               </tr>
+
+                               <tr>
+                                  <th></th>
+                                  <th><input st-search="auditType" placeholder="audit type " class="input-sm form-control search-input"
+                                    type="search"/></th>
+                                    <th><input st-search="year" placeholder="year " class="input-sm form-control search-input"
+                                      type="search"/></th>
+                                      <th><input st-search="station" placeholder="station " class="input-sm form-control search-input"
+                                        type="search"/></th>
+                                       
+                                        <!-- <th><input st-search="from|  date : 'mediumDate'" placeholder="Start Date " class="input-sm form-control search-date"
+                                          type="search"/></th>
+                                          <th><input st-search="to|  date : 'mediumDate'" placeholder="End Date " class="input-sm form-control search-date"
+                                            type="search"/></th> -->
+                                            <th></th>
+                                <th></th></tr>
+                       
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="data in auditsDone track by $index" class="editable-row">
+                            <td>    
+                                <span>
+                                 {{ ((current_page-1)*page_size)+$index + 1 || '-' }} 
+                                </span>
+                              </td>
+                          <td>    
+                            <span editable-text="data.auditType" e-name="auditType" e-form="rowform" e-required>
+                            {{ data.auditType || '-' }}
+                            </span>
+                          </td>
+                          <td>    
+                            <span editable-text="data.year" e-name="year" e-form="rowform" >
+                            {{ data.year || '-' }}
+                            </span>
+                          </td>
+                          <td>    
+                            <span editable-text="data.station" e-name="station" e-form="rowform" >
+                            {{ data.station || '-' }}
+                            </span>
+                          </td>
+                          
+                          <td style="width: 200px" >    
+                              <span>
+                               {{ data.from |  date : "mediumDate" || '-' }} 
+                              </span>
+                            </td>
+                            <td style="width: 200px">    
+                                <span>
+                                 {{ data.to |  date : "mediumDate" || '-' }} 
+                                </span>
+                              </td>
+                         
+                            </div>
+                          </td> 
+                        </tr>
+                         
+                        </tbody>   
+                        <tfoot>
+                            <tr>
+                              <td colspan="8" class="text-center">
+                                <div st-pagination="" st-items-by-page="page_size" st-page-change="rembemberCurrentPage(newPage)" st-displayed-pages="100"></div>
+                              </td>
+                            </tr>
+                            </tfoot>        
+                    </table>
+                
+      </div>
+      </div>
+    </div> 
+  </div>
+

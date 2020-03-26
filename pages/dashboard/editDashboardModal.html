@@ -1,0 +1,114 @@
+
+       <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">Add a new Audit Report</h3>
+        </div>
+        <div class="modal-body" ng-controller="dashboard-ctrl" style = "overflow-x: auto; position: relative; overflow-y: auto;" id="modal-body">
+            
+            <div class="container" style="margin-left:5px;margin-right:5px; width: 450px">
+                <div class="row">
+                <div class="col-sm">
+
+                        <form name="form" style="color: black" >
+                            
+                            <div style="color:blue">
+                            Audit Done: {{modaldata.auditType}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Year: {{modaldata.year}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Station: {{modaldata.station}}
+                        </div>
+                            <br>
+                           
+                            <br>
+                            <div style="color:red">*</div>Sub-station: 
+                              <br>
+                            <select  style="width: 350px" name="subStation" ng-options="subStations.subStation for subStations in subStations" value="" ng-model="subStationinput" required>
+                                <option value=""  hidden /></select> 
+                            <br>
+                            <br>
+                               
+                            <div style="color:red">*</div>General Observations:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <br>
+                            <textarea name="generalObservations" style="width:350px;height:50px;" ng-model="generalObservationsinput" required="required"></textarea>
+                            <br>
+                            <br>
+                            
+                            <div style="color:red">*</div>Recommendations:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <br>
+                            <textarea name="recommendations" style="width:350px;height:50px;" ng-model="recommendationsinput" required="required"></textarea>
+                            <br>
+                            <br>
+
+                            <div style="color:red">*</div>Target Date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <br>
+                           
+                            <input style="width: 350px" type="text" name="targetDate" value=""  ng-model="targetDateinput" required="required">
+                            <br>
+                            <br>
+
+                            <div style="color:red">*</div>Current Status:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <br>
+                            <textarea name="currentStatus" style="width:350px;height:50px;" ng-model="currentStatusinput" required="required"></textarea>
+
+                            <br>
+                            <br>
+                          
+                            Action Taken:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <br>
+                            <textarea name="actionsTaken" style="width:350px;height:50px;" ng-model="actionsTakeninput" ></textarea>
+                            <br>
+                            <br>
+
+                            <div style="color:red">*</div>Compliance Status:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <br>
+                            <select  style="width: 350px" name="complianceStatus" ng-options="complianceStatus.complianceStatus for complianceStatus in complianceStatus" value="" ng-model="complianceStatusinput" required>
+                                <option value=""  hidden /></select> 
+                            <br>
+                            <br>
+
+                            Action taken by:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <br>
+                            <input style="width: 350px" type="text" name="actionTakenBy" value="" ng-model="actionTakenByinput" >
+                            <br>
+                            <br>
+
+                            Remarks:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <br>
+                            <textarea name="remarks" style="width:350px;height:50px;" ng-model="remarksinput" ></textarea>
+                           <br>
+                            <br>
+
+
+                            Upload file:
+                            <br>
+                            <br>
+                           <input type="file" file-model="myFile" required="required" style="margin-left:110px"/><br>
+                          <button ng-click="uploadFile()">Upload</button>
+                            <br>
+                            <div style="color:blue">
+                            {{uploadmessage}}
+                        </div>
+
+
+                           
+                            <br>
+                            <br>
+                            <button class="btn btn-warning" type="submit" value="Submit" ng-click="addNewEntries()" ng-disabled="form.$invalid">Submit</button>
+                            &nbsp;&nbsp; <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                           <!-- <input type="submit" value="Submit"> -->
+                          </form> 
+
+
+
+
+
+
+
+
+                   
+                </div>
+                </div>
+            </div>
+            
+
+        </div>
+        <!-- <div class="modal-footer">
+          <button class="btn btn-success" type="button" ng-click="pc.ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div> -->

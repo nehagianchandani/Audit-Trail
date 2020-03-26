@@ -1,0 +1,131 @@
+<div ng-controller = "reports-ctrl">
+    <!-- <div class="row" ng-show = "!delhiDelivery.delhiDeliveryData">
+        <div class="loader">Loading...</div>
+      </div>
+      
+        <div ng-show = "delhiDelivery.delhiDeliveryData &&  delhiDelivery.delhiDeliveryData.length == 0">
+          <div class="alert">
+              <h3>
+                <strong>Sorry!</strong> No records fould as per the set filters
+              </h3>
+          </div>
+        </div>  
+       
+      <div ng-show = "delhiDelivery.delhiDeliveryData &&  delhiDelivery.delhiDeliveryData.length > 0"   style="background-size: 1679px 944px; background-position: 0px -79px;">
+        <div class = "col-md-6" style="padding:0px">
+            <div class="panel-body"  style="padding:0px"> 
+                <div class = "row" ng-hide = "hideEditHistoryRemarks">
+                  <div style="margin-bottom: 20px;margin-top: 10px">
+                    <button type="button" ng-click = "addNewRecord()" class="btn btn-default btn-icon"><i class="ion-plus"></i></button> 
+                      Add New Record
+                  </div>
+                </div>  
+    
+                
+                <table ng-show = "delhiDelivery.delhiDeliveryData" style="margin: 0px; width:100%" class="table-bordered table-hover table-condensed" >
+                    <tr>
+                       <td> 
+                      <table style="margin : 0px" class="table table-bordered table-hover table-condensed">
+                        <thead>
+                            <tr rowspan="3">
+                                <th colspan="6">Delhi Delivery</th>
+                              </tr>
+                            <tr rowspan="3">
+                              <th colspan="3">Batch no</th>
+                              <th colspan="1">Tank no</th>
+                              <th colspan="1">FMR Qty.</th>
+                              <th colspan="1">Dip Qty.</th>      
+                              <th ng-hide = "hideEditHistoryRemarks" colspan="1" ng-show = "isAdmin">Actions</th>
+                            </tr>
+                            <tr rowspan="3">
+                              <th>Origin</th>
+                              <th>Product</th>
+                              <th>Seq. No</th>
+                              <th></th>
+                              <th></th>
+                              <th></th>
+                              <th ng-hide = "hideEditHistoryRemarks" ng-show = "isAdmin"></th>
+                            </tr>
+                        </thead>
+                        <tbody ng-init="$parent.totalDelDelivFmr = 0; $parent.totalDelDelivDip = 0;">
+                          <tr ng-repeat="data in delhiDelivery.delhiDeliveryData track by $index" class="editable-row">
+                              <td style = "width:100px" class="select-td">    
+                                  <span editable-select="data.origin" e-name="origin" e-form="rowform" e-selectpicker e-ng-options="origin for origin in $parent.origin">
+                                    {{ data.origin || '-' }}
+                                  </span>
+                                </td>
+                            <td style = "width:100px" class="select-td">    
+                              <span editable-select="data.product" e-name="product" e-form="rowform" e-selectpicker e-ng-options="product for product in $parent.products">
+                                {{ data.product || '-' }}
+                              </span>
+                            </td>
+                            <td>
+                              <span editable-number="data.seq_no" e-step="any" e-name="seq_no"  e-form="rowform" e-required>
+                                  {{ data.seq_no || '-' }}
+                              </span>
+                            </td>
+                            <td>
+                              <span editable-text="data.tank_no" e-name="tank_no" e-form="rowform"  e-required>
+                                  {{ data.tank_no || '-' }}
+                              </span>
+                            </td>
+                            <td ng-init="$parent.totalDelDelivFmr = $parent.totalDelDelivFmr + data.fmr">
+                                <span editable-number="data.fmr" e-name="fmr" e-form="rowform" e-required>
+                                    {{ data.fmr || '-' }}
+                                </span>
+                            </td>
+                            <td ng-init="$parent.totalDelDelivDip = $parent.totalDelDelivDip + data.dip_qty">
+                                <span editable-number="data.dip_qty" e-name="dip_qty" e-form="rowform" e-required>
+                                    {{ data.dip_qty || '-' }}
+                                </span>
+                            </td>
+                            <td ng-show = "isAdmin" ng-hide = "hideEditHistoryRemarks">
+                              <form editable-form name="rowform" onaftersave = "editdelhiDeliveryData(data, $index)" ng-show="rowform.$visible" class="form-buttons form-inline"
+                                    shown="inserted == data">
+                                <button type="submit"  ng-disabled="rowform.$waiting" class="btn btn-success editable-table-button btn-xs">
+                                  Save
+                                </button>
+                                <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs">
+                                  Cancel
+                                </button>
+                              </form>
+                              <div class="buttons" ng-show="!rowform.$visible">
+                                <button class="btn btn-danger editable-table-button btn-xs" ng-click="rowform.$show(); editdelhiDeliveryStart(data)">Edit</button>
+                                <button class="btn btn-info editable-table-button btn-xs" ng-show = "isAdmin && !isShiftOfficer" ng-click="open(data)">History</button>
+                              </div>
+                            </td>
+                          </tr>
+                            <tr>
+                                <td style = "width:100px" class="select-td">    
+                                    Total
+                                  </td>
+                            
+                                  <td>
+                                    </td>
+                                    <td>
+                                  </td>
+                                  <td>
+                                  </td>
+                                  <td>
+                                      {{ totalDelDelivFmr }}
+                                  </td>
+                                  <td> 
+                                      {{ totalDelDelivDip }}
+                                  </td>
+                                  <td ng-hide = "hideEditHistoryRemarks"  ng-show = "isAdmin">
+                                  </td>
+                              </tr>
+                          </tbody>        
+                      </table>
+                    </td>
+                    </tr>
+                    </table>
+                      
+                  <div class="button-wrapper ng-scope" ng-hide = "hideEditHistoryRemarks">
+                    <button type="button"  ng-click="openRemarks()" class="btn btn-success btn-md">Remarks</button>
+                </div>
+      
+        </div>
+        </div>
+      </div> -->
+</div>

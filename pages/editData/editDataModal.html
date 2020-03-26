@@ -1,0 +1,177 @@
+
+      
+      
+      
+      <div  class="modal-header">
+            <h3 class="modal-title" id="modal-title">Details</h3>
+        </div>
+        <div     class="modal-body" ng-controller="editData-ctrl" style = "overflow-x: auto; position: relative; overflow-y: auto;" id="modal-body">
+            
+            <div  class="container" style="width: 1500px">
+                <div class="row">
+                <div  class="col-sm">
+
+                    <table  style="width: 1500px" st-table="entries" st-safe-src="rowCollectionEntries" style="margin : 0px;color: black" class="table">
+                      <div style=" color:blue; ">
+                        
+                        Audit Done: {{detailsmodaldata.auditType}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Year: {{detailsmodaldata.year}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Station: {{detailsmodaldata.station}}
+                    </div>
+                      
+                      
+                      <thead>
+                           
+                            <tr>
+                              
+                                <th>Sr. no</th>
+                                <th style="width: 140px"> Sub-station</th>
+                                <th style="width: 100px">General Observations</th>
+                                <th  style="width: 150px">Recommendations</th>
+                                <th  style="width: 150px">Target Date</th>
+                               <th style="width: 100px">Current Status</th>
+                                <th style="width: 100px">Action taken</th>
+                                <th style="width: 100px">Compliance Status</th>
+                                <th style="width: 100px">Action taken by</th>
+                                <th style="width: 100px">Remarks</th>
+                                <th>File uploaded</th>
+                                <th style="width: 100px">Edited Date</th>
+                                <th style="width: 100px">Employee ID</th>
+                              <th></th>
+                            
+                             
+                              
+                                   </tr>
+                                  
+                         
+                      </thead>
+                      <tbody>
+
+                        <tr ng-repeat="data in entries  track by $index"  class="editable-row">
+                          
+                          
+      
+
+                        <!-- <div style=" color:blue; ">
+                          {{detailsmodaldata.auditType}}-{{detailsmodaldata.year}}-{{detailsmodaldata.station}}-{{detailsmodaldata.subStation}}
+                      </div> -->
+                      <td> {{((current_page-1)*page_size1)+$index+1}}</td>
+                      <td>   
+
+                        <span editable-select="data.subStation" name="subStation" e-form="rowform" e-selectpicker e-ng-options="subStations.subStation for subStations in subStations" value="" ng-model="subStationinput" required>
+                        {{ data.subStation || '-' }}
+                      </span>
+                       
+                      </td>
+                    
+                    <td>    
+                      <span editable-text="data.generalObservations" e-name="generalObservations" e-form="rowform" e-required>
+                      {{ data.generalObservations || '-' }}
+                    </span>
+                    </td>
+                    <td>    
+                      <span editable-text="data.recommendations" e-name="recommendations" e-form="rowform" e-required>
+                      {{ data.recommendations || '-' }}
+                    </span>
+                    </td>
+                    <td>    
+                      <span editable-text="data.targetDate" e-name="targetDate" e-form="rowform" e-required>
+                        {{ data.targetDate || '-' }}
+                     
+                      </span>
+                     
+                    </td>
+                    <td>    
+                      <span editable-text="data.currentStatus" e-name="currentStatus" e-form="rowform" e-required>
+                        {{ data.currentStatus || '-' }}
+                      </span>
+                     
+                    </td>
+                    <td>    
+                      <span editable-text="data.actionTaken" e-name="actionTaken" e-form="rowform" e-required>
+                        {{ data.actionTaken || '-' }}
+                      </span>
+                    </td>
+                    <td>    
+                        <span editable-select="data.complianceStatus" name="complianceStatus" e-form="rowform" e-selectpicker e-ng-options="complianceStatus.complianceStatus for complianceStatus in complianceStatus" value="" ng-model="complianceStatusinput" required>
+                      {{ data.complianceStatus || '-' }}
+                    </span>
+                    </td>
+                    <td>    
+                      <span editable-text="data.actionTakenBy" e-name="actionTakenBy" e-form="rowform" e-required>
+                      {{ data.actionTakenBy || '-' }}
+                    </span>
+                    </td>
+                    <td>    
+                      <span editable-text="data.remarks" e-name="remarks" e-form="rowform" e-required>
+                      {{ data.remarks || '-' }}
+                    </span>
+                    </td>
+
+                    <td>
+                        <span ng-show="data.image">
+                        <a href="./assets/uploads/{{data.image}}" target="_blank">Open file</a>
+                      </span>
+                      <span ng-show="!data.image">
+                          No file uploaded.
+                        </span>
+                      </td>
+                    <td>    
+                      
+                      {{ data.editDate |  date : "mediumDate" || '-' }}
+                      
+                    </td>
+                    <td>    
+                      
+                      {{ data.empID || '-' }}
+                      
+                    </td>
+                    <td>
+                      <form editable-form name="rowform" onaftersave = "editEntriesOldData(data, ((current_page-1)*page_size1)+$index)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == data">
+                        <button type="submit"  ng-disabled="rowform.$waiting" class="btn btn-success editable-table-button btn-xs">
+                          Save
+                        </button>
+                        <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-warning editable-table-button btn-xs">
+                          Cancel
+                        </button>
+                      </form>
+                      <div class="buttons" ng-show="!rowform.$visible">
+                          <button class="btn btn-info editable-table-button btn-xs" ng-click="rowform.$show(); editEntiresStart(data)">Edit</button>
+                          <button class="btn btn-danger editable-table-button btn-xs" ng-click="opendeleteEntries(data)">Delete</button>
+                          <button class="btn btn-success editable-table-button btn-xs" ng-click="openHistory(data)">History</button> 
+                          <!-- <button class="btn btn-danger editable-table-button btn-xs" ng-click="deleteUserData(data,((current_page-1)*page_size)+$index);">Delete</button> -->
+                        </div>
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                      <td colspan="13" class="text-center">
+                        <div st-pagination="" st-items-by-page="page_size1" st-page-change="rembemberCurrentPage(newPage)" st-displayed-pages="100"></div>
+                      </td>
+                    </tr>
+                    </tfoot>   
+</table>
+                   
+                      </div>
+                     
+                 
+
+
+
+                  
+
+
+
+
+
+  
+                   
+                </div>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+              <!-- <button class="btn btn-success" type="button" ng-click="pc.ok()">OK</button> -->
+                <button class="btn btn-warning" type="button" ng-click="canceldelete()">Cancel</button>
+                
+            </div>
+       

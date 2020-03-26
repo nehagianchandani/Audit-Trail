@@ -1,0 +1,98 @@
+<div ng-controller = "user-ctrl" ng-init="init()">
+  <div ng-show = "user &&  user.length == 0">
+    <div class="alert">
+            <h4 style="color:red">
+              <strong>Sorry!</strong> No records found.
+            </h4>
+        
+    </div>
+  </div>  
+  
+<div style="background-size: 1679px 944px; background-position: 0px -79px; color: black">
+
+  <div style="padding:0px">
+      <div class="panel-body"  style="padding:0px"> 
+          <div class = "row" >
+            <div style="margin-bottom: 20px;margin-top: 10px">
+              <button type="button" ng-click = "addNewRecord()" class="btn btn-default btn-icon"><i class="ion-plus"></i></button> 
+                Add New Record
+            </div>
+          </div>  
+
+          
+         
+               <table style="width: 800px" st-table="user" st-safe-src="rowCollection" style="margin : 0px;color: black" class="table">
+                  <thead>
+                     
+                      <tr>
+                        <th style="width: 30px">Sr. No</th>
+                        <th style="width: 150px">Employee ID</th>
+                        <th style="width: 150px">Location</th>
+                        <th>Station Incharge</th>
+                        <th style="width: 200px">Actions</th>
+                       
+                             </tr>
+                             <tr>
+                                <th></th>
+                                <th><input st-search="empID" placeholder="Search employee ID " class="input-sm form-control search-input"
+                                  type="search"/></th>
+                                  <th><input st-search="location" placeholder="Search location " class="input-sm form-control search-input"
+                                    type="search"/></th>
+                                    <th></th>
+                                    <th></th>
+                              </tr>
+                     
+                  </thead>
+                  <tbody>
+                      <tr ng-repeat="data in user track by $index" class="editable-row">
+                          <td>    
+                              <span>
+                               {{ ((current_page-1)*page_size)+$index+1 || '-' }} 
+                              </span>
+                            </td>
+                        <td>    
+                          <span editable-text="data.empID" e-name="empID" e-form="rowform" e-required>
+                          {{ data.empID || '-' }}
+                          </span>
+                        </td>
+                        <td>    
+                          <span editable-select="data.location" e-name="location" e-form="rowform" e-selectpicker e-ng-options="location.station for location in location" >
+                          {{ data.location || '-' }}
+                          </span>
+                        </td>
+                        <td>    
+                          <span editable-select="data.stationIncharge" e-name="stationIncharge" e-form="rowform" e-selectpicker e-ng-options="stationIncharge for stationIncharge in stationIncharge">
+                          {{ data.stationIncharge || '-' }}
+                          </span>
+                        </td>
+                        <td>
+                          <form editable-form name="rowform" onaftersave = " editUserData(data,((current_page-1)*page_size)+$index)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == data">
+                            <button type="submit"  ng-disabled="rowform.$waiting" class="btn btn-success editable-table-button btn-xs">
+                              Save
+                            </button>
+                            <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-warning editable-table-button btn-xs">
+                              Cancel
+                            </button>
+                          </form>
+                          <div class="buttons" ng-show="!rowform.$visible">
+                            <button class="btn btn-info editable-table-button btn-xs" ng-click="rowform.$show();">Edit</button>
+                            <!-- <button class="btn btn-danger editable-table-button btn-xs" ng-click="deleteUserData(data,((current_page-1)*page_size)+$index);">Delete</button> -->
+                            <button class="btn btn-danger editable-table-button btn-xs" ng-click="opendelete(data);">Delete</button>
+                          </div>
+                        </td>
+                      </tr>
+                       
+                      </tbody>
+                      <tfoot>
+                          <tr>
+                            <td colspan="6" class="text-center">
+                              <div st-pagination="" st-items-by-page="page_size" st-page-change="rembemberCurrentPage(newPage)" st-displayed-pages="100"></div>
+                            </td>
+                          </tr>
+                          </tfoot>        
+                  </table>
+              
+    </div>
+    </div>
+  </div> 
+</div>
